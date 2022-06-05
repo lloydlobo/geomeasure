@@ -1,0 +1,16 @@
+{
+  "name": "geomeasure",
+  "description": "Measure distance using GPS and without any API's",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "typescript": "^4.7.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
