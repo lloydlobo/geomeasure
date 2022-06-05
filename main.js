@@ -1,6 +1,7 @@
 "use strict";
 console.log("Hello, world!");
 window.onload = main;
+let CURRENT_COORDINATES = null;
 function main() {
     console.log("It works on load!");
     let geolocation = null;
@@ -21,8 +22,15 @@ function main() {
     }
 }
 function onLocationUpdate(event) {
-    console.log("Location updated!");
-    console.log(event);
+    console.log("Location updated!"); // console.log(event);
+    // every time we get a new location,
+    // we update the global coordinates to new coordinates
+    CURRENT_COORDINATES = event.coords;
+    const location = document.getElementById("loc");
+    // Error, some.expr may be null or undefined ---> Object is possibly 'null'.ts(2531) -> https://stackoverflow.com/a/40350534
+    // Suppress the error with a ! --> ! - Non-null assertion operator
+    location.innerHTML = `Your location is: <br>
+    Latitude: ${CURRENT_COORDINATES.latitude}<br> Longitude: ${CURRENT_COORDINATES.longitude}`;
 }
 function onError(err) {
     console.log(err);
@@ -37,7 +45,7 @@ function onError(err) {
     \|__|\|__| \|__|\|__|    \|_______|
                                        
  */
-/*
+/** $ console.dir(geolocation)
 
 Geolocation {  }
  ​
@@ -46,10 +54,10 @@ clearWatch: function clearWatch()
 constructor: function ()
 getCurrentPosition: function getCurrentPosition()
 watchPosition: function watchPosition()
-  ​​
 Symbol(Symbol.toStringTag): "Geolocation"
-  ​​
 <prototype>: Object { … }
-
 */
+/** GeolocationPositionError { code: 1, message: "User denied geolocation prompt" }
+ *
+ */
 //# sourceMappingURL=main.js.map
