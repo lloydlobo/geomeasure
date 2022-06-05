@@ -128,8 +128,17 @@ function euclidean(
 // endregion: --- Get Distance
 
 // region:    --- Button Events
-btnA?.addEventListener("click", setA);
-btnB?.addEventListener("click", setB);
+
+btnA?.addEventListener("click", () => {
+  setA();
+  const timeA = Date.now();
+  console.log(timeA);
+});
+btnB?.addEventListener("click", () => {
+  setB();
+  const timeB = Date.now();
+  console.log(timeB);
+});
 // endregion: --- Button Events
 /* 
 ___  ________   ________ ________     

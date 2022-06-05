@@ -98,8 +98,16 @@ function euclidean(p1, p2) {
 }
 // endregion: --- Get Distance
 // region:    --- Button Events
-btnA === null || btnA === void 0 ? void 0 : btnA.addEventListener("click", setA);
-btnB === null || btnB === void 0 ? void 0 : btnB.addEventListener("click", setB);
+btnA === null || btnA === void 0 ? void 0 : btnA.addEventListener("click", () => {
+    setA();
+    const timeA = Date.now();
+    console.log(timeA);
+});
+btnB === null || btnB === void 0 ? void 0 : btnB.addEventListener("click", () => {
+    setB();
+    const timeB = Date.now();
+    console.log(timeB);
+});
 // endregion: --- Button Events
 /*
 ___  ________   ________ ________
