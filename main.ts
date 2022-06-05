@@ -67,17 +67,60 @@ function updateInfo() {
   }
 
   if (A !== null && B !== null) {
-    let distance = `?`;
-    distanceInfo!.innerHTML = `distance: ${distance} meters`;
+    // let distance = `?`;
+    let distance = getDistance(A, B);
+    distanceInfo!.innerHTML = `Distance: ${distance} meters`;
   }
 }
 
-// endregion  --- Update Buttons
+// endregion: --- Update Buttons
 
-// region  --- Button Events
+// region:    --- Get Distance
+
+// Gets points in xyz
+function latlonToXYZ(
+  latlon: { latitude: number; longitude: number },
+  RADIUS_EARTH: number
+) {
+  const xyz = { x: 0.0, y: 0.0, z: 0.0 }; // center of earth's core
+  xyz.y = Math.sin(degToRad(latlon.latitude)) * RADIUS_EARTH;
+  const radius = Math.cos(degToRad(latlon.latitude)) * RADIUS_EARTH;
+  xyz.x = Math.sin(degToRad(latlon.longitude)) * radius;
+  xyz.z = Math.cos(degToRad(latlon.longitude)) * radius;
+  return xyz;
+}
+
+// Converts degrees to Radians
+function degToRad(degree: number) {
+  return (degree * Math.PI) / 180;
+}
+
+function getDistance(latlon1: any, latlon2: any) {
+  const RADIUS_EARTH = 6371 * 1000; // in meters approx
+  const xyz1 = latlonToXYZ(latlon1, RADIUS_EARTH);
+  const xyz2 = latlonToXYZ(latlon2, RADIUS_EARTH);
+  const euclideanDistance = euclidean(xyz1, xyz2);
+  return euclideanDistance;
+}
+
+// Euclidean Distance Calculator
+// Math.sqrt((x1-x2)**2 + (y1-y2)**2 + (z1-z2)**2)
+function euclidean(
+  p1: { x: any; y: any; z: any },
+  p2: { x: any; y: any; z: any }
+) {
+  return Math.sqrt(
+    Math.pow(p1.x - p2.x, 2) +
+      Math.pow(p1.y - p2.y, 2) +
+      Math.pow(p1.z - p2.z, 2)
+  );
+}
+// endregion: --- Get Distance
+
+// region:    --- Button Events
 btnA?.addEventListener("click", setA);
 btnB?.addEventListener("click", setB);
-// endregion  --- Button Events
+// endregion: --- Button Events
 /* 
 ___  ________   ________ ________     
 |\  \|\   ___  \|\  _____\\   __  \    
