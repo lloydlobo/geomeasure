@@ -5,6 +5,10 @@ const btnA = document.getElementById("aBtn") as HTMLButtonElement | null;
 const btnB = document.getElementById("bBtn") as HTMLButtonElement | null;
 const distanceInfo = document.getElementById("info") as HTMLElement | null;
 
+const btnWrapHorizontal = document.querySelector(
+  ".container--horizontal"
+) as HTMLDivElement;
+console.log(btnWrapHorizontal);
 let CURRENT_COORDINATES: { latitude: any; longitude: any } | null = null;
 let A: { latitude: any; longitude: any } | null = null;
 let B: { latitude: any; longitude: any } | null = null;
@@ -36,10 +40,11 @@ function onLocationUpdate(event: { coords: any }) {
   CURRENT_COORDINATES = event.coords;
   const location = document.getElementById("loc") as HTMLElement | null;
   // Suppress the error with a ! --> ! - Non-null assertion operator
-  location!.innerHTML = `Your location is: <br>
-  Latitude: ${CURRENT_COORDINATES!.latitude}<br> Longitude: ${
-    CURRENT_COORDINATES!.longitude
-  }`;
+  location!.innerHTML = `Your location is: <br><span class="locationFont">
+  Latitude: ${CURRENT_COORDINATES!.latitude.toFixed(
+    4
+  )}<br> Longitude: ${CURRENT_COORDINATES!.longitude.toFixed(4)}
+  </span>`;
 }
 
 function onError(err: any) {
@@ -59,17 +64,22 @@ function setB() {
 
 function updateInfo() {
   if (A !== null) {
-    btnA!.innerHTML = `${A.latitude}<br>${A.longitude}`;
+    btnA!.innerHTML = `${A.latitude.toFixed(4)}<br>${A.longitude.toFixed(4)}`;
+    btnA!.classList.add("locationFont");
   }
 
-  if (B !== null) {
-    btnB!.innerHTML = `${B.latitude}<br>${B.longitude}`;
+  if (B != null) {
+    btnB!.innerHTML = `${B.latitude.toFixed(4)}<br>${B.longitude.toFixed(4)}`;
+    btnB!.classList.add("locationFont");
+    btnWrapHorizontal!.style.setProperty("--gap-btn", `1rem`);
   }
 
   if (A !== null && B !== null) {
     // let distance = `?`;
     let distance = getDistance(A, B);
-    distanceInfo!.innerHTML = `Distance: ${distance} meters`;
+    distanceInfo!.innerHTML = `distance<br>------<br> ${Math.round(
+      distance
+    )} meters`;
   }
 }
 
