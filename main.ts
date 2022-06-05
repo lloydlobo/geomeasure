@@ -1,7 +1,13 @@
 console.log("Hello, world!");
 window.onload = main;
 
-let CURRENT_COORDINATES = null;
+const btnA = document.getElementById("aBtn") as HTMLButtonElement | null;
+const btnB = document.getElementById("bBtn") as HTMLButtonElement | null;
+const distanceInfo = document.getElementById("info") as HTMLElement | null;
+
+let CURRENT_COORDINATES: { latitude: any; longitude: any } | null = null;
+let A: { latitude: any; longitude: any } | null = null;
+let B: { latitude: any; longitude: any } | null = null;
 
 function main() {
   console.log("It works on load!");
@@ -22,32 +28,66 @@ function main() {
   }
 }
 
-function onLocationUpdate(event: any) {
+function onLocationUpdate(event: { coords: any }) {
   console.log("Location updated!"); // console.log(event);
 
   // every time we get a new location,
   // we update the global coordinates to new coordinates
   CURRENT_COORDINATES = event.coords;
   const location = document.getElementById("loc") as HTMLElement | null;
-  // Error, some.expr may be null or undefined ---> Object is possibly 'null'.ts(2531) -> https://stackoverflow.com/a/40350534
   // Suppress the error with a ! --> ! - Non-null assertion operator
   location!.innerHTML = `Your location is: <br>
-    Latitude: ${CURRENT_COORDINATES.latitude}<br> Longitude: ${CURRENT_COORDINATES.longitude}`;
+  Latitude: ${CURRENT_COORDINATES!.latitude}<br> Longitude: ${
+    CURRENT_COORDINATES!.longitude
+  }`;
 }
 
 function onError(err: any) {
   console.log(err);
 }
+
+// region:    --- Update Buttons
+function setA() {
+  A = CURRENT_COORDINATES;
+  updateInfo();
+}
+
+function setB() {
+  B = CURRENT_COORDINATES;
+  updateInfo();
+}
+
+function updateInfo() {
+  if (A !== null) {
+    btnA!.innerHTML = `${A.latitude}<br>${A.longitude}`;
+  }
+
+  if (B !== null) {
+    btnB!.innerHTML = `${B.latitude}<br>${B.longitude}`;
+  }
+
+  if (A !== null && B !== null) {
+    let distance = `?`;
+    distanceInfo!.innerHTML = `distance: ${distance} meters`;
+  }
+}
+
+// endregion  --- Update Buttons
+
+// region  --- Button Events
+btnA?.addEventListener("click", setA);
+btnB?.addEventListener("click", setB);
+// endregion  --- Button Events
 /* 
- ___  ________   ________ ________     
+___  ________   ________ ________     
 |\  \|\   ___  \|\  _____\\   __  \    
 \ \  \ \  \\ \  \ \  \__/\ \  \|\  \   
- \ \  \ \  \\ \  \ \   __\\ \  \\\  \  
-  \ \  \ \  \\ \  \ \  \_| \ \  \\\  \ 
-   \ \__\ \__\\ \__\ \__\   \ \_______\
-    \|__|\|__| \|__|\|__|    \|_______|
-                                       
- */
+\ \  \ \  \\ \  \ \   __\\ \  \\\  \  
+\ \  \ \  \\ \  \ \  \_| \ \  \\\  \ 
+\ \__\ \__\\ \__\ \__\   \ \_______\
+\|__|\|__| \|__|\|__|    \|_______|
+
+*/
 
 /** $ console.dir(geolocation)
 
@@ -65,3 +105,5 @@ Symbol(Symbol.toStringTag): "Geolocation"
 /** GeolocationPositionError { code: 1, message: "User denied geolocation prompt" }
  *
  */
+
+// Error, some.expr may be null or undefined ---> Object is possibly 'null'.ts(2531) -> https://stackoverflow.com/a/40350534
