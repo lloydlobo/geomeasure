@@ -1,7 +1,7 @@
 {
   "name": "Geomeasure Distance",
   "short_name": "Geomeasure",
-  "start_url": "/?home=true",
+  "start_url": "/geomeasure",
   "icons": [
     {
       "src": "icons/manifest-icon-192.maskable.png",
