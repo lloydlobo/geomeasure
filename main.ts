@@ -18,8 +18,8 @@ function main() {
   let geolocation = null;
   if (window.navigator && window.navigator.geolocation) {
     geolocation = window.navigator.geolocation;
-    console.dir(geolocation);
-    console.log("Geolocation is available!");
+    // console.dir(geolocation);
+    // console.log("Geolocation is available!");
   }
   if (geolocation) {
     geolocation.watchPosition(onLocationUpdate, onError, {
@@ -33,7 +33,7 @@ function main() {
 }
 
 function onLocationUpdate(event: { coords: any }) {
-  console.log("Location updated!"); // console.log(event);
+  // console.log("Location updated!"); // console.log(event);
 
   // every time we get a new location,
   // we update the global coordinates to new coordinates
@@ -132,12 +132,12 @@ function euclidean(
 btnA?.addEventListener("click", () => {
   setA();
   const timeA = Date.now();
-  console.log(timeA);
+  // console.log(timeA);
 });
 btnB?.addEventListener("click", () => {
   setB();
   const timeB = Date.now();
-  console.log(timeB);
+  // console.log(timeB);
 });
 // endregion: --- Button Events
 /* 

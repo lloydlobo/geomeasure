@@ -52,7 +52,7 @@ body {
   margin-inline: auto;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  font-size: clamp(1rem, 5vw, 2.5rem); /* use 25px */
+  font-size: clamp(1rem, 2vw, 2.5rem); /* use 25px */
 
   text-align: center;
 
@@ -222,7 +222,9 @@ display smaller coordinates */
   font-family: Courier, monospace;
   text-align: left;
 }
-
+.location > * {
+  font-size: 1rem;
+}
 /* endregion: --- Button */
 
 /* region:    --- UI */
@@ -230,7 +232,7 @@ display smaller coordinates */
 .container--vertical {
   display: flex;
   flex-direction: column;
-  width: min(100% - 2rem, 78vw);
+  width: min(100% - 2rem, 75.614vw);
 }
 
 .container--horizontal {
@@ -241,7 +243,7 @@ display smaller coordinates */
 }
 
 .instruction {
-  font-size: 0.74rem;
+  font-size: 0.8rem;
   color: var(--fg4);
 
   /* temporary */

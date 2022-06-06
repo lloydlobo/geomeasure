@@ -14,8 +14,8 @@ function main() {
     let geolocation = null;
     if (window.navigator && window.navigator.geolocation) {
         geolocation = window.navigator.geolocation;
-        console.dir(geolocation);
-        console.log("Geolocation is available!");
+        // console.dir(geolocation);
+        // console.log("Geolocation is available!");
     }
     if (geolocation) {
         geolocation.watchPosition(onLocationUpdate, onError, {
@@ -29,7 +29,7 @@ function main() {
     }
 }
 function onLocationUpdate(event) {
-    console.log("Location updated!"); // console.log(event);
+    // console.log("Location updated!"); // console.log(event);
     // every time we get a new location,
     // we update the global coordinates to new coordinates
     CURRENT_COORDINATES = event.coords;
@@ -101,12 +101,12 @@ function euclidean(p1, p2) {
 btnA === null || btnA === void 0 ? void 0 : btnA.addEventListener("click", () => {
     setA();
     const timeA = Date.now();
-    console.log(timeA);
+    // console.log(timeA);
 });
 btnB === null || btnB === void 0 ? void 0 : btnB.addEventListener("click", () => {
     setB();
     const timeB = Date.now();
-    console.log(timeB);
+    // console.log(timeB);
 });
 // endregion: --- Button Events
 /*
